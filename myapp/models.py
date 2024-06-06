@@ -11,7 +11,6 @@ class Register(models.Model):
     self_description = models.TextField(max_length=200, null=True, blank=True)
     job_expectation = models.TextField(max_length=200, null=True, blank=True)
     programming_lang = models.CharField(max_length=50, null=True, blank=True)
-    lang_frameworks = models.CharField(max_length=50, null=True, blank=True)
     last_framework = models.CharField(max_length=50, null=True, blank=True)
     last_post_experience = models.CharField(max_length=50, null=True, blank=True)
     last_comp_name = models.CharField(max_length=50, null=True, blank=True)
