@@ -20,4 +20,4 @@ class Register(models.Model):
     email = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"{self.firstname }"
+        return f"{self.firstname | self.lastname }"
