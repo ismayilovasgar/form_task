@@ -3,6 +3,7 @@ from django.urls import reverse
 from .forms import RegisterForm
 from django.http import HttpResponseRedirect
 from .models import *
+from django.contrib import messages
 
 
 # Create your views here.
@@ -11,7 +12,7 @@ def register__page(request):
 
 
 def signup__page(request):
-
+    # * Muellim izah etdiyi yol
     if request.method == "POST":
         firstname = request.POST.get("firstname")
         lastname = request.POST.get("lastname")
@@ -45,19 +46,22 @@ def signup__page(request):
             email=email,
         )
         newRegister.save()
+        messages.success(request, "Successfully Add Your Information")
     return redirect(reverse("register", kwargs={}))
 
-    # context = dict()
-    # url = request.META.get("HTTP_REFERER")
 
-    # if request.method == "POST":
-    #     form = RegisterForm(request.POST)
-    #     if form.is_valid():
-    #         message = form.save(commit=False)
-    #         message.save()
-    #         return HttpResponseRedirect(url)
+# * Internetden Baxdim
+# context = dict()
+# url = request.META.get("HTTP_REFERER")
 
-    # else:
-    #     context["form"] = RegisterForm()
+# if request.method == "POST":
+#     form = RegisterForm(request.POST)
+#     if form.is_valid():
+#         message = form.save(commit=False)
+#         message.save()
+#         return HttpResponseRedirect(url)
 
-    # return render(request, "admin", context)
+# else:
+#     context["form"] = RegisterForm()
+
+# return render(request, "admin", context)
