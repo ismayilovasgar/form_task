@@ -25,7 +25,10 @@
                         {{user.firstname}}
                     </th>
                     <td>
-                        <button type="button" class="btn btn-success">Download PDF</button>                    </td>
+                      <a href="{% url 'pdf' 2 %}">
+                        <button type="button" class="btn btn-success">Download PDF</button>
+                      </a>                    
+                    </td>
                   </tr>
                   {% endfor %}
                 </tbody>
