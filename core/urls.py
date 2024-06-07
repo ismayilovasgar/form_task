@@ -24,4 +24,7 @@ urlpatterns = [
     path("register/", register__page, name="register"),
     path("", register__page, name="register"),
     path("signup/", signup__page, name="signup"),
+    path("list/", download__page, name="download"),
+    path("profile/", home, name="home"),
+    # path("pdf/", generatePDF, name="pdf"),
 ]

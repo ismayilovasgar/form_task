@@ -1,9 +1,10 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from .forms import RegisterForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.contrib import messages
+import pdfkit
 
 
 # Create your views here.
@@ -65,3 +66,39 @@ def signup__page(request):
 #     context["form"] = RegisterForm()
 
 # return render(request, "admin", context)
+
+# config = pdfkit.configuration(
+#     wkhmtltopdf=r"C:/Program Files/wkhtmltox/bin/wkhtmltopdf.exe"
+# )
+
+
+def home(request):
+    return render(request, "profile.html")
+
+
+# def generatePDF(request, pk):
+#     pdf = pdfkit.from_url(
+#         request.build_absolute_uri(reverse("home", args=[pk])),
+#         False,
+#         configuration=config,
+#     )
+#     response = HttpResponse(pdf, content_type="application/pdf")
+#     response["Content-Disposition"] = 'attachment; filename="file_name.pdf"'
+#     return response
+
+
+# def generateCV(request, pk):
+#     pdf = pdfkit.from_url(
+#         request.build_absolute_uri(reverse("home", args=[pk])),
+#         False,
+#         configuration=config,
+#     )
+#     response = HttpResponse(pdf, content_type="application/pdf")
+#     response["Content-Disposition"] = 'attachment; filename="file_name.pdf"'
+#     return response
+
+
+def download__page(request):
+    registers = Register.objects.all()
+    context = {"users": registers}
+    return render(request, "download.html", context)
