@@ -1,11 +1,11 @@
 from django.forms import ModelForm, TextInput, EmailInput
-from .models import Register
+from .models import *
 
 
-class RegisterForm(ModelForm):
+class ProfilesForm(ModelForm):
 
     class Meta:
-        model = Register
+        model = Profiles
         fields = (
             "firstname",
             "lastname",

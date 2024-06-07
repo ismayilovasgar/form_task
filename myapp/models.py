@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class Register(models.Model):
+class Profiles(models.Model):
     firstname = models.CharField(
         max_length=50, null=True, blank=True, verbose_name="FirstName"
     )
