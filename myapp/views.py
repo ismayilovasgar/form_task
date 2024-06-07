@@ -8,10 +8,6 @@ import pdfkit
 
 
 # Create your views here.
-def register__page(request):
-    return render(request, "register.html")
-
-
 def signup__page(request):
     # * Muellim izah etdiyi yol
     # if request.method == "POST":
@@ -53,7 +49,6 @@ def signup__page(request):
     # * Internetden Baxdim
     context = dict()
     url = request.META.get("HTTP_REFERER")
-    print(url)
 
     if request.method == "POST":
         form = ProfilesForm(request.POST)
@@ -65,19 +60,16 @@ def signup__page(request):
     else:
         context["form"] = ProfilesForm()
 
-    return render(request, "admin", context)
+    return render(request, "profiles.html", context)
 
 
+# **********************************************
 config = pdfkit.configuration(
     wkhtmltopdf=r"C:/Program Files/wkhtmltox/bin/wkhtmltopdf.exe"
 )
 
 
-def home(request):
-    return render(request, "resume.html")
-
-
-def generatePDF(request, id):
+def generatePDF(request):
     pdf = pdfkit.from_url(
         request.build_absolute_uri(reverse("home")),
         False,
@@ -88,7 +80,28 @@ def generatePDF(request, id):
     return response
 
 
-def download__page(request):
-    registers = Register.objects.all()
-    context = {"users": registers}
-    return render(request, "download.html", context)
+def generateCv(request, pk):
+    pdf = pdfkit.from_url(
+        request.build_absolute_uri(reverse("specific_user", args=[pk])),
+        False,
+        configuration=config,
+    )
+    response = HttpResponse(pdf, content_type="application/pdf")
+    response["Content-Disposition"] = 'attachment; filename="file_name.pdf"'
+    return response
+
+
+def list__page(request):
+    users = Profiles.objects.all()
+    context = {"users": users}
+    return render(request, "list.html", context)
+
+
+def SpecificUser(request, pk):
+    user = Profiles.objects.get(id=pk)
+    context = {"user": user}
+    return render(request, "specific_user.html", context)
+
+
+def home(request):
+    return render(request, "profiles.html")

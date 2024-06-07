@@ -18,13 +18,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from myapp.views import *
-
+app_name="app"
 urlpatterns = [
-    path("admin/", admin.site.urls, name="adm"),
-    path("register/", register__page, name="register"),
-    path("", register__page, name="register"),
-    path("signup/", signup__page, name="signup"),
-    path("list/", download__page, name="download"),
-    path("profile/", home, name="home"),
-    path("pdf/<int:id>", generatePDF, name="pdf"),
+    path("admin/", admin.site.urls, name="admin"),
+    path("", home, name="home"),
+    path("register/", signup__page, name="register"),
+    path("list/", list__page, name="list"),
+
+    path("pdf/", generatePDF, name="pdf"),
+
+    path("cv/<int:pk>", generateCv, name="cv"),
+
+    path("user/<int:pk>", SpecificUser, name="specific_user"),
 ]
